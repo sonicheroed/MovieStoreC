@@ -12,11 +12,5 @@ namespace MovieStoreC.DL.Repositories
         }
     }
 
-    internal class MovieMongoRepository : IMovieRepository
-    {
-        public List<Movie> GetAll()
-        {
-            return StaticDb.Movies;
-        }
-    }
+   
 }
