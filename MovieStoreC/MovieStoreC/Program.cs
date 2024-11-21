@@ -1,3 +1,4 @@
+using Mapster;
 using MovieStoreC.BL;
 using MovieStoreC.BL.Interfaces;
 using MovieStoreC.DL;
@@ -14,6 +15,8 @@ namespace MovieStoreC
             builder.Services
                 .RegisterRepositories()
                 .RegisterServices();
+
+            builder.Services.AddMapster();
 
             builder.Services.AddControllers();
 
