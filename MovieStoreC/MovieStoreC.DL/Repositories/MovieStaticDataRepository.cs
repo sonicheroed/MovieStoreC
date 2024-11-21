@@ -10,6 +10,14 @@ namespace MovieStoreC.DL.Repositories
         {
             return StaticDb.Movies;
         }
+
+        public Movie? GetById(int id)
+        {
+            if (id <= 0) return null;
+
+            return StaticDb.Movies
+                .FirstOrDefault(x => x.Id == id);
+        }
     }
 
    
