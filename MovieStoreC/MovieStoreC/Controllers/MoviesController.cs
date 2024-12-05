@@ -22,9 +22,16 @@ namespace MovieStoreC.Controllers
         }
 
         [HttpGet("GetAll")]
-        public IEnumerable<Movie> GetAll()
+        public IActionResult GetAll()
         {
-            return _movieService.GetAll();
+            var result = _movieService.GetAll();
+
+            if (result != null && result.Count > 0)
+            {
+                return Ok(result);
+            }
+
+            return NotFound();
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -49,11 +56,13 @@ namespace MovieStoreC.Controllers
         }
 
         [HttpPost("Add")]
-        public void Add([FromBody]AddMovieRequest movie)
+        public IActionResult Add([FromBody]AddMovieRequest movie)
         {
             var movieDto = _mapper.Map<Movie>(movie);
 
             _movieService.Add(movieDto);
+
+            return Ok();
         }
 
         [HttpDelete("Delete")]
