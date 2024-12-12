@@ -16,7 +16,7 @@ namespace MovieStoreC.BL
             RegisterServices(this IServiceCollection services)
         {
             return services
-                        .AddSingleton<IMoviesService, MoviesService>()
+                        .AddSingleton<IMoviesService, MoviesMongoRepository>()
                         .AddSingleton<IBusinessService, BusinessService>();
         }
     }
