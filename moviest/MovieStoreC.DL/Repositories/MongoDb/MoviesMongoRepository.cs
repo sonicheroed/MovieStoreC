@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using DnsClient.Internal;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MovieStoreC.DL.Interfaces;
@@ -12,24 +13,26 @@ namespace MovieStoreC.DL.Repositories.MongoDb
         private readonly IMongoCollection<Movie> _moviesCollection;
         private readonly ILogger<MoviesMongoRepository> _logger;
 
-
-        public MoviesMongoRepository(IOptionsMonitor<MongoDbConfiguration> mongoConfig,
+        public MoviesMongoRepository(
+            IOptionsMonitor<MongoDbConfiguration> mongoConfig,
             ILogger<MoviesMongoRepository> logger)
         {
             _logger = logger;
 
-            var client = new MongoClient(mongoConfig.CurrentValue.ConnectionString);
-            var database = client.GetDatabase(mongoConfig.CurrentValue.DatabaseName);
+            var client = 
+                new MongoClient(mongoConfig.CurrentValue.ConnectionString);
+            var database = client.GetDatabase(
+                mongoConfig.CurrentValue.DatabaseName);
             _moviesCollection = database.GetCollection<Movie>("MoviesDb");
         }
 
-
         public List<Movie> GetAll()
         {
-            return _moviesCollection.Find(m => true).ToList();
+            return _moviesCollection.Find(m => true)
+                .ToList();
         }
 
-        public Movie? GetById(int id)
+        public Movie? GetById(string id)
         {
             throw new NotImplementedException();
         }
